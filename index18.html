@@ -1,0 +1,405 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+    <style>
+    #blueRect{
+        width:100px;
+        height:100px;
+        background-color:blue;
+    }
+    </style>
+</head>
+<body>
+<div id="blueRect"></div>
+ 
+<script>
+const blueRect = document.getElementById("blueRect");
+// получаем стиль для blueRect
+const blueRectStyle = window.getComputedStyle(blueRect);
+// устанавливаем обработчик нажатия клавиши
+window.addEventListener("keydown", moveRect);
+ 
+function moveRect(e){
+    const left = parseInt(blueRectStyle.marginLeft); //смещение от левого края
+    const top = parseInt(blueRectStyle.marginTop);  // смещения от левой границы
+     
+    switch(e.key){
+         
+        case "ArrowLeft":  // если нажата клавиша влево
+            if(left>0)
+                blueRect.style.marginLeft = left - 50 + "px";
+            break;
+        case "ArrowUp":   // если нажата клавиша вверх
+            if(top>0)
+                blueRect.style.marginTop = top - 50 + "px";
+            break;
+        case "ArrowRight":   // если нажата клавиша вправо
+            if(left < document.documentElement.clientWidth - 100)
+                blueRect.style.marginLeft = left + 50 + "px";
+            break;
+        case "ArrowDown":   // если нажата клавиша вниз
+            if(top < document.documentElement.clientHeight - 100)
+                blueRect.style.marginTop = top + 50 + "px";
+            break;
+    }
+}
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <button id="btn">Pay</button>
+    <script>
+    const button = document.getElementById("btn");
+    const myAcc = new Account(11111100); // условный денежный счет
+    // устанавливаем обработчик события payment для всего документа
+    document.addEventListener("payment", ()=>console.log("Payment succeeded!"));
+ 
+    // по нажатию на кнопку выполняем метод pay
+    button.addEventListener("click", ()=>myAcc.pay(55550));
+    // конструктор объекта счета
+    function Account(money) {
+        _money = money;
+        this.pay=function(sum){
+            if(_money >= sum){
+                _money -= sum;
+                console.log(_money);
+ 
+                const event = new Event("payment"); // определяем объект события
+                document.dispatchEvent(event);      // генерируем событие для всего документа
+            }
+        }
+    }
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <form id="search" name="search" action="https://youtube.com/search" method="get">
+        <input type="text" id="key" name="q" />
+        <input type="submit" id="send" name="send" />
+    </form>
+    <script>
+    const form = document.getElementById("search");
+    console.log(form.elements);     // HTMLFormControlsCollection(2) [input, input, q: input, send: input]
+    console.log(form.length);       // 2
+    console.log(form.name);         // search
+    console.log(form.action);       // https://google.com/search
+    console.log(form.method);       // get
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+<form name="search">
+    <input type="text" name="key" placeholder="Введите ключ"></input>
+    <input type="button" name="print" value="Печать" />
+</form>
+<div id="printBlock"></div>
+<script>
+function printForm(e){
+     
+    // получаем значение поля key
+    const keyBox = document.search.key;
+    const val = keyBox.value;
+    // получаем элемент printBlock
+    const printBlock = document.getElementById("printBlock");
+    // создаем новый параграф
+    const pElement = document.createElement("p");
+    // устанавливаем у него текст
+    pElement.textContent = val;
+    // добавляем параграф в printBlock
+    printBlock.appendChild(pElement);
+}
+ 
+const printButton = document.search.print;
+printButton.addEventListener("click", printForm);
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пошук імен</title>
+</head>
+<body>
+
+    <label for="searchInput">Введіть ім'я:</label>
+    <input type="text" id="searchInput">
+    <button onclick="checkName()">Перевірити</button>
+    
+    <script>
+        function checkName() {
+            var inputValue = document.getElementById("searchInput").value;
+            var result = (inputValue === "Мирослав" || inputValue === "Віталій");
+            
+            if (result) {
+                alert("True");
+            } else {
+                alert("False");
+            }
+        }
+    </script>
+
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+ <form name="loginForm">
+    <input type="password" name="password" />
+</form>
+<div id="printBlock"></div>
+<script>
+const passwordBox = document.loginForm.password;
+  
+// обработчик изменения текста
+function oninput(e){
+    // получаем элемент printBlock
+    const printBlock = document.getElementById("printBlock");
+    // получаем новое значение
+    printBlock.textContent = e.target.value;
+} 
+passwordBox.addEventListener("input", oninput); 
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

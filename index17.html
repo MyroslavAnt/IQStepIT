@@ -1,0 +1,314 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <button onclick="btn_click()">Click Me</div>
+    <script>
+    let clicks = 0;     // счетчик нажатий
+    function btn_click(){
+        console.log("Clicked", ++clicks);
+    }
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <button id="btn">Click Me</div>
+    <script>
+    let clicks = 0;     // счетчик нажатий
+    function btn_click(){
+        console.log("Clicked", ++clicks);
+    }
+    // устанавливаем обработчик нажатия для элемента с id="btn"
+    document.getElementById("btn").onclick = btn_click; 
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <button id="btn">Click Me</div>
+    <script>
+    let clicks = 0;     // счетчик нажатий
+    function btn_click(){
+        console.log("Clicked", ++clicks);
+    }
+    const btn = document.getElementById("btn");
+    // прикрепляем обработчик события "click"
+    btn.addEventListener("click", btn_click);
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <button id="btn" onclick="btn_click('Button Clicked')">Click Me</button>
+    <script>
+    // в обработчик передается текст
+    function btn_click(text){
+        console.log(text);  // выводим этот текст
+    }
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+    <style>
+    #blueRect{
+        width:100px;
+        height:100px;
+        background-color:blue;
+    }
+    #redRect{
+        width:50px;
+        height:50px;
+        background-color:red;
+    }
+    </style>
+</head>
+<body>
+    <div id="blueRect">
+        <div id="redRect"></div>
+    </div>
+    <script>
+    const redRect = document.getElementById("redRect");
+    redRect.addEventListener("click", () => console.log("Событие на redRect"));
+     
+    const blueRect = document.getElementById("blueRect");
+    blueRect.addEventListener("click", ()=>console.log("Событие на blueRect"));
+     
+    document.body.addEventListener("click", () => console.log("Событие на body"));
+    </script>
+</body>
+</html>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Кольорові та анімовані імена</title>
+   <style>
+     button {
+       margin: 10px;
+       padding: 15px;
+       font-size: 16px;
+       cursor: pointer;
+       transition: background-color 0.3s ease, color 0.3s ease;
+     }
+ 
+     button:hover {
+       background-color: #2ecc71;
+       color: #fff;
+     }
+ 
+     #output {
+       font-size: 24px;
+       font-weight: bold;
+       text-align: center;
+       margin-top: 20px;
+     }
+   </style>
+ </head>
+ <body>
+ 
+ <button onclick="displayName('Мирослав')" style="background-color: #3498db; color: #fff;">Відобразити ім'я Мирослав</button>
+ <button onclick="displayName('Віталій')" style="background-color: #e74c3c; color: #fff;">Відобразити ім'я Віталій</button>
+ 
+ <div id="output"></div>
+ 
+ <script>
+   function displayName(name) {
+     // Вивести в консоль браузера
+     console.log('Ім\'я: ' + name);
+ 
+     // Вивести в вікно браузера
+     alert('Ім\'я: ' + name);
+ 
+     // Вивести на сторінку
+     document.getElementById('output').innerHTML = 'Ім\'я: <span style="color: #27ae60; text-transform: capitalize;">' + name + '</span>';
+   }
+ </script>
+ 
+ </body>
+ </html>
+  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

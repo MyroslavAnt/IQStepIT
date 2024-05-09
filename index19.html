@@ -1,0 +1,614 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+    <style>
+    input {width: 150px;}
+    input:invalid {border-color: red; }
+    input:valid { border-color: green;}
+    </style>
+</head>
+<body>
+<form id="registerForm" name="registerForm" method="post" action="register">
+<p>
+    <label for="username">Username:</label><br>
+    <input id="username" name="username" maxlength="20" minlength="3" required>
+</p>
+<p>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required>
+</p>
+<p>
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" min="1" max="110" value="18">
+</p>
+<button type="submit" id="submit" name="submit"><a href="index1.html">Register</a></button>
+</form>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Таймер</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.timer {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 90%;
+}
+
+input, button {
+    padding: 8px 12px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: calc(25% - 10px);
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.pause {
+    background-color: #f44336;
+}
+
+.pause.paused {
+    background-color: #ff6f61;
+}
+
+#timerDisplay {
+    font-size: 24px;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+#timerDisplay.dark-mode {
+    color: #fff;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden; /* Чтобы прогресс-бар обрезался при достижении 100% */
+}
+
+.progress {
+    height: 20px;
+    background-color: #4CAF50;
+    border-radius: 4px;
+    width: 100%; /* Изначально прогресс-бар заполнен на 100% */
+    transition: width 0.3s ease; /* Плавное изменение ширины */
+}
+
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.dark-mode input, .dark-mode button {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode button:hover {
+    background-color: #555;
+}
+
+.dark-mode .progress-bar {
+    background-color: #555;
+}
+
+.dark-mode #timerDisplay {
+    color: #000;
+}
+
+.dark-mode h1 {
+    color: #000;
+}
+</style>
+</head>
+<body>
+<div class="timer" id="timer">
+    <h1>Таймер</h1>
+    <div style="display: flex; flex-wrap: wrap;">
+        <input type="number" id="hours" placeholder="Часы" min="0" autocomplete="off">
+        <input type="number" id="minutes" placeholder="Минуты" min="0" max="59" autocomplete="off">
+        <input type="number" id="seconds" placeholder="Секунды" min="0" max="59" autocomplete="off">
+        <button onclick="startTimer()" id="startButton">Старт</button>
+        <button onclick="pauseTimer()" id="pauseButton" disabled>Пауза</button>
+        <button onclick="stopTimer()">Стоп</button>
+        <button onclick="resetTimer()">Сброс</button>
+    </div>
+    <div id="timerDisplay"></div>
+    <div class="progress-bar">
+        <div class="progress" id="progressBar"></div>
+    </div>
+</div>
+<audio id="alarmSound" src="background-epic-piano-music-for-short-video-vlog-advertising-1-minute-180911.mp3" preload="auto"></audio>
+<script>
+var timer;
+var timerDisplay = document.getElementById('timerDisplay');
+var hoursInput = document.getElementById('hours');
+var minutesInput = document.getElementById('minutes');
+var secondsInput = document.getElementById('seconds');
+var pauseButton = document.getElementById('pauseButton');
+var startButton = document.getElementById('startButton');
+var progressBar = document.getElementById('progressBar');
+var totalTime = 0;
+var timeLeft = 0;
+var paused = false;
+var updateInterval = 1000;
+var notificationTime = 10;
+var repeatInterval = 30;
+var alarmSound = document.getElementById('alarmSound');
+var soundEnabled = true;
+var musicPlayed = false;
+
+alarmSound.addEventListener('ended', function() {
+    this.currentTime = 0;
+    if (timeLeft > 0 && !musicPlayed) {
+        this.play();
+        musicPlayed = true;
+    }
+});
+
+function startTimer() {
+    if (!timer) {
+        var hours = parseInt(hoursInput.value) || 0;
+        var minutes = parseInt(minutesInput.value) || 0;
+        var seconds = parseInt(secondsInput.value) || 0;
+        totalTime = hours * 3600 + minutes * 60 + seconds;
+        timeLeft = totalTime;
+        if (totalTime > 0 && !paused) {
+            timer = setInterval(updateTimer, updateInterval);
+            startButton.disabled = true;
+            pauseButton.disabled = false;
+        }
+        paused = false;
+    }
+}
+
+function pauseTimer() {
+    paused = !paused;
+    if (paused) {
+        clearInterval(timer);
+        pauseButton.textContent = 'Продолжить';
+        pauseButton.classList.add('paused');
+    } else {
+        startTimer();
+        pauseButton.textContent = 'Пауза';
+        pauseButton.classList.remove('paused');
+    }
+}
+
+function stopTimer() {
+    clearInterval(timer);
+    timer = null;
+    paused = false;
+    timerDisplay.textContent = 'Таймер остановлен';
+    totalTime = 0;
+    timeLeft = 0;
+    startButton.disabled = false;
+    pauseButton.disabled = true;
+}
+
+function resetTimer() {
+    clearInterval(timer);
+    timer = null;
+    paused = false;
+    timerDisplay.textContent = '';
+    hoursInput.value = '0';
+    minutesInput.value = '0';
+    secondsInput.value = '0';
+    progressBar.style.width = '0%';
+    startButton.disabled = false;
+    pauseButton.disabled = true;
+    musicPlayed = false; // Сброс флага при сбросе таймера
+}
+
+function updateTimer() {
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        timer = null;
+        timerDisplay.textContent = 'Время вышло!';
+        progressBar.style.width = '100%'; // Устанавливаем прогресс-бар на 100%
+        playAlarm();
+    } else {
+        var displayHours = ('0' + Math.floor(timeLeft / 3600)).slice(-2);
+        var displayMinutes = ('0' + Math.floor((timeLeft % 3600) / 60)).slice(-2);
+        var displaySeconds = ('0' + timeLeft % 60).slice(-2);
+        timerDisplay.textContent = displayHours + ':' + displayMinutes + ':' + displaySeconds;
+        var progress = ((totalTime - timeLeft) / totalTime) * 100;
+        progressBar.style.width = progress + '%';
+        timeLeft--;
+
+        if (timeLeft === notificationTime) {
+            sendNotification();
+        }
+
+        if (timeLeft === 0 || (timeLeft % repeatInterval) === 0) {
+            playAlarm();
+        }
+    }
+}
+
+function sendNotification() {
+    if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Время поджимает!', { body: 'Осталось ' + notificationTime + ' секунд.' });
+    }
+}
+
+function playAlarm() {
+    if (soundEnabled) {
+        alarmSound.play();
+    }
+}
+
+// Автоматическое определение темной темы
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+    timerDisplay.classList.add('dark-mode');
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        startTimer();
+    } else if (event.key === ' ') {
+        pauseTimer();
+    }
+});
+
+if ('Notification' in window) {
+    Notification.requestPermission();
+}
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Точное время</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20vw; /* Размер шрифта в зависимости от ширины экрана */
+        font-weight: bold;
+    }
+
+    /* Медиа-запрос для мобильных устройств */
+    @media only screen and (max-width: 600px) {
+        body, html {
+            font-size: 10vw;
+        }
+    }
+
+    /* Для устройств с высоким разрешением (телевизоры и прочее) */
+    @media only screen and (min-resolution: 192dpi) {
+        body, html {
+            font-size: 10vw;
+        }
+    }
+
+    /* Для устройств Windows */
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        body, html {
+            font-size: 15vw;
+        }
+    }
+
+    /* Для устройств iOS */
+    @supports (-webkit-touch-callout: none) {
+        body, html {
+            font-size: 15vw;
+        }
+    }
+
+    /* Для устройств flip flop (поворот экрана) */
+    @media screen and (orientation: landscape) {
+        body, html {
+            font-size: 15vw;
+        }
+    }
+
+    /* Черный режим */
+    [data-color-scheme="dark"] {
+        background-color: black;
+        color: white;
+    }
+</style>
+</head>
+<body>
+<span id="time"></span>
+<script>
+    // Добавляем обработчик события для сохранения настроек пользователя
+    window.addEventListener('DOMContentLoaded', () => {
+        if (!localStorage.getItem('colorScheme')) {
+            localStorage.setItem('colorScheme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        }
+        applyColorScheme();
+    });
+
+    // Функция для применения цветовой схемы
+    function applyColorScheme() {
+        const colorScheme = localStorage.getItem('colorScheme');
+        document.documentElement.setAttribute('data-color-scheme', colorScheme);
+    }
+
+    // Добавляем обработчик события для изменения цветовой схемы
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        const colorScheme = event.matches ? 'dark' : 'light';
+        localStorage.setItem('colorScheme', colorScheme);
+        applyColorScheme();
+    });
+
+    function updateTime() {
+        fetch('https://worldtimeapi.org/api/ip')
+            .then(response => response.json())
+            .then(data => {
+                var time = new Date(data.utc_datetime);
+                var hours = time.getHours().toString().padStart(2, '0');
+                var minutes = time.getMinutes().toString().padStart(2, '0');
+                var seconds = time.getSeconds().toString().padStart(2, '0');
+                document.getElementById('time').textContent = hours + ':' + minutes + ':' + seconds;
+            })
+            .catch(error => console.error('Ошибка при получении времени:', error));
+    }
+    updateTime();
+    setInterval(updateTime, 1000); // Обновление времени каждую секунду
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

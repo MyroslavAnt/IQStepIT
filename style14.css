@@ -1,0 +1,14 @@
+.K{
+    padding: 40px;
+    margin: 20px;
+    border: 10px solid blue;
+}
+
+
+@media (max-width: 380px){
+    .K{
+        margin: 10px;
+        padding: 10px;
+        border: 40px solid rgb(166, 255, 0);
+    }
+}
